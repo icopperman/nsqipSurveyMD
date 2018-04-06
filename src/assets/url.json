@@ -1,0 +1,58 @@
+{
+  "url": "http://localhost:55474/nsqip",
+  "urlUAT": "https://myapps.uat.nyp.org/Nsqipsurveyapi/nsqip",
+  "langDictionary" : {
+         "Month is required" : ["", "Se requiere un mes"],
+         "Too few digits for Month" : ["", "Muy pocos dígitos para el mes"],
+         "Too many digits for Month" : ["", "Demasiados dígitos para el mes"],
+         "Must be greater than 1" : ["", "Debe ser mayor que 1"],
+         "Range: 1-12" : ["", "Distancia: 1-12"],
+         "Day is required" : ["", "El día es obligatorio"],
+         "Too few digits for Day" : ["", "Muy pocos dígitos para el día"],
+         "Too many digits for Day" : ["", "Demasiados dígitos para el día"],
+         "Range: 1-31" : ["", "Distancia: 1-31"],
+         "Year is required" : ["", "Se requiere un año"],
+         "Too few digits for Year" : ["", "Muy pocos dígitos por año"],
+         "Too many digits for Year" : ["", "Demasiados dígitos para el año"],
+         "Year must be less than current year" : ["", "El año debe ser menor que el año actual"],
+         "Year must be greater than 1900" : ["", "El año debe ser mayor que 1900"],
+         "Server error, please try later"                      : ["", "Error del servidor, por favor intente más tarde"],
+         "Thank you"                                           : ["", "Gracias"  ],
+         "Close Survey"                                        : ["","Encuesta Cercana"],
+         "Welcome"                                             : ["","Bienvenido"],
+         "Start Survey"                                        : ["","Empezar encuesta"],
+         "Survey"                                              : ["","Encuesta"],
+         "Next"                                                : ["","Siguiente"],
+         "Yes"                                                 : ["","Si"],
+         "No"                                                  : ["","No"],
+         "Incorrect birth date"                                : ["", "fecha de nacimiento incorrecta"],
+         "dob"                                                 : ["Please enter your Date of Birth", "Por favor, introduzca su fecha de nacimiento", "Please enter the patient\"s Date of Birth", "Por favor ingrese la fecha de nacimiento del paciente"],
+         "Before we begin please help us verify your identity.": ["","Antes de comenzar, ayúdenos a verificar su identidad."]
+    },
+    "confirmMessages" :
+    [
+       [
+        "Your health and feedback are important\n    to us. We greatly appreciate your response.<br/><br/>\n    Thank you very much for your time and attention,<br/><br/>\n    Sincerely,<br/><br/>\n    Barbara Janiszewska, RN<br/>\n    Quality Management Specialist/Surgical Clinical Reviewer for ACS NSQIP<br/><br/>\n    Quality and Patient Saftety Division of New York-Presbyterian Hospital\n    "
+       ,"Su salud y sus comentarios son importantes para nosotros. Apreciamos mucho su respuesta.\n    Gracias mucho por su tiempo y atención.<br/><br/>\n    Sinceramente,<br/><br/>\n    Barbara Janiszewska, RN<br/><br/>\n    Quality Management Specialist/Revisor clínico de la cirugía para ACS NSQIP<br/><br/>\n    Quality and Patient Safety Divison of New York-Presbyterian Hospital\n    "
+       ]
+       ,[
+         "Your child's health and your opinion are important to New York-Presbyterian Hospital.\n    Thank you for taking the time to complete this survey.<br/><br/>\n\n    Sincerely,<br/><br/>\n    sourceName and credentials<br/><br/>\n    Surgical Clinical Reviewer<br/><br/>\n    New York-Presbyterian Hospital<br/><br/>\n    111-111-1111\n  "
+       ,"\n    La salud de su hijo y su opinión son importantes para New York-Presbyterian Hospital.\n           Gracias por tomarse el tiempo para completar esta encuesta.<br/><br/>\n\n\n                             Sinceramente,<br/><br/>\n                             sourceName and credentials<br/><br/>\n                             Surgical Clinical Reviewer<br/><br/>\n                             New York-Presbyterian Hospital<br/><br/>\n                             111-111-1111<br/><br/>\n                             "
+       ]
+    ],
+
+    "welcomeMessages" :
+    [
+       [
+        "`Thank you for choosing New York-Presbyterian Hospital for your care.<br/><br/>You had surgery on ${this.surgeryDate}. We are interested in your recovery <b>after</b> you left the hospital. <br/><br/>The Department of Surgery at our hospital is a member of the American College of Surgeons' National Surgical Quality Improvement Porgram (NSQIP). We are gathering information on the outcomes of our patients after surgery.<br/><br/> Please take a few minutes to answer the questions below and return this letter in the self-addressed envolope.<br/><br/> The information you provide is maintained as strictly <b>confidential</b>.`"
+        ,"`Gracias por elegir New York-Presbyterian Hospital para su atención médica.<br/><br/>Hace varias semanas usted tenía cirugía y estamos interesados en su recuperación después de salir del hospital. <br/><br/>El Departamento de Cirugía de nuestro hospital son miembros del Programa nacional de mejora de la calidad quirúrgica, dirigido por el Colegio Americano de Cirujanos. Estamos recopilando información sobre el estado de nuestros pacientes después de la cirugía.<br/><br/> Tome por favor algunos unos minutos para contestar a las preguntas siguientes y para volver esta letra en el uno mismo incluido dirigido, sobre estampado. <br/><br/>La información que proporcione se mantiene de forma estrictamente confidencial.`"
+       ]
+       ,[
+        "`On ${this.operationDate} your child had an operation at ${this.hospitalName}.<br/><br/>Dr. ${this.doctorName} and the Department of Pediatric Surgery, at our hospital, are members of the American College of Surgeons' National Surgical Quality Improvement Program. We are gathering information on the outcomes of our patients after surgery. <br/><br/>Please take a few minutes to answer the questions in this survey. <br/><br/>Your answers are strictly <b>confidential</b>.`"
+        ,"`El ${this.operationDate} su hijo tuvo una operación en ${this.hospitalName}. <br/><br/>El ${this.doctorName} y el Departamento de Cirugía Pediátrica, en nuestro hospital, son miembros del Colegio Americano of Surgeons' National Surgical Quality Improvement Programme. Estamos recopilando información sobre resultados de nuestros pacientes después de la cirugía.<br/><br/>Tómese unos minutos para responder las preguntas de esta encuesta.<br/><br/>Sus respuestas son <b>estrictamente</b> confidenciales.`"
+       ]
+    ]
+  }
+
+
+

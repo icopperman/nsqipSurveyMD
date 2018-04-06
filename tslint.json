@@ -7,7 +7,7 @@
     "callable-types": true,
     "class-name": true,
     "comment-format": [
-      true,
+      false,
       "check-space"
     ],
     "curly": true,
@@ -103,8 +103,8 @@
         "call-signature": "nospace",
         "index-signature": "nospace",
         "parameter": "nospace",
-        "property-declaration": "nospace",
-        "variable-declaration": "nospace"
+        "property-declaration": "space",
+        "variable-declaration": "space"
       }
     ],
     "unified-signatures": true,
