@@ -10,7 +10,6 @@ export class AppLoadService {
   getURL() {
 
     const path = 'assets/url.json'; //really a json file, but iis will not serve json files
-
     const promise = this.http.get(path)
                   .toPromise()
                   .then(settings => {

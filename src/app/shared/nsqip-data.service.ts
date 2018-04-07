@@ -129,7 +129,8 @@ getQuestions(id: string): Observable<PQs | PQError> {
       this.savedPatientWithAnswers = new PatientWithAnswers();
       this.savedPQs                = new PQs();
 
-      const xx = `${this.url}/getquestions/${id}`;
+      //const xx = `${this.url}/getquestions/${id}`;
+      const xx = 'assets/WOU.json';
 
       return this.http.get<PQs>(xx)
           .pipe(
