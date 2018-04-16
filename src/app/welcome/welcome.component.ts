@@ -11,16 +11,7 @@ import { PQs              }      from '../models/nqsip-data';
 export class WelcomeComponent implements OnInit {
 
   patientName         : string;
-
-  surgeryDate         : string;
   introMessage        : string;
-  introMessageSpanish : string;
-  welcomeMessage      : string;
-  welcomeMessages     : string[][] = [];
-
-  hospitalName        : string;
-  doctorName          : string;
-  operationDate       : string;
 
   constructor(private router: Router, private q: NsqipDataService) {
 
@@ -29,51 +20,44 @@ export class WelcomeComponent implements OnInit {
     this.q.getQuestions(id).subscribe( ( pq: PQs) => {
 
           const aorc = pq.patient.patientType.toLowerCase();
-          const lang = pq.patient.patientLanguage;
-
-          const adultIdx = 0;
-          const childIdx = 1;
-          const engIdx = 0;
-          const espIdx = 1;
 
           const rowIdx = (aorc.startsWith('a') === true) ? 0 : 1;
-          const colIdx = (lang === 'en') ? 0 : 1;
-          this.welcomeMessages[0] = [];
-          this.welcomeMessages[1] = [];
-          this.welcomeMessages = this.q.welcomeMessages;
-          this.introMessage = this.welcomeMessages[rowIdx][colIdx];
+          const colIdx = (pq.patient.patientLanguage === 'en') ? 0 : 1;
 
-          this.welcomeMessage = this.getString('Welcome');
+          this.patientName = pq.patient.patientName.split(',')[1];
+          const replacements = [pq.patient.surgeryDate];
 
-          if (aorc.substring(0, 1) === 'a') {
-    this.patientName = pq.patient.patientName.split(',')[1];
-    this.surgeryDate = pq.patient.surgeryDate;
+          if (aorc.substring(0, 1) === 'c') {
 
-    //        this.setAdultStrings(pq);
+              this.patientName = this.q.getString('Parent/Guardian of ') + this.patientName;
+              replacements.push(pq.patient.hospitalName, pq.patient.surgeonName);
 
-          } else {
-            this.patientName = `Parent/Guardian of ${pq.patient.patientName.split(',')[1]}`;
-            this.surgeryDate = pq.patient.surgeryDate;
-            this.hospitalName = pq.patient.hospitalName;
-            this.doctorName = pq.patient.surgeonName;
-            this.operationDate = pq.patient.surgeryDate;
+            }
 
-            //this.setChildStrings(pq);
+            this.introMessage = this.doReplacement(replacements, rowIdx, colIdx);
 
-         }
      });
 
   }
 
-  ngOnInit() {}
+  doReplacement(replaceArray: string[], rowIdx: number, colIdx: number): string {
 
-  getString(msg: string): string {
+    const xx = this.q.welcomeMessages[rowIdx][colIdx]
+                    .split('$')
+                    .reduce(function(acc, cv, idx, aray): string {
 
-    const amsg = this.q.getString(msg);
+                      if (idx === replaceArray.length) {
+                        return acc + cv;
+                      } else {
+                        return acc += cv + replaceArray[idx];
+                      }
+                    }, '');
 
-    return amsg;
+    return xx;
 
   }
+
+  ngOnInit() {}
 
   startSurvey() {
 
@@ -82,70 +66,101 @@ export class WelcomeComponent implements OnInit {
 
   }
 
-  setAdultStrings(pq: PQs): void {
+   getString(msg: string): string {
 
-    this.patientName = pq.patient.patientName.split(',')[1];
-    this.surgeryDate = pq.patient.surgeryDate;
-    let lang = pq.patient.patientLanguage;
+    const amsg = this.q.getString(msg);
 
-    if (lang == null) {
-      console.log('welcome: lang is null');
-      lang = 'en';
-    }
-
-    if (lang === 'en') {
-
-      this.introMessage = `Thank you for choosing New York-Presbyterian Hospital for your care.<br/><br/>
-                               You had surgery on ${this.surgeryDate}. We are interested in your recovery <b>after</b> you left the hospital. <br/><br/>The Department of
-                               Surgery at our hospital is a member of the American College of Surgeons' National Surgical Quality Improvemnt Porgram (NSQIP).
-                               We are gathering information on the outcomes of our patients after surgery.<br/><br/> Please take a few minutes to answer the questions below and
-                               return this letter in the self-addressed envolope.<br/><br/> The information you provide is maintained as strictly <b>confidential</b>.
-                               `;
-
-  } else {
-
-      this.introMessage = `Gracias por elegir New York-Presbyterian Hospital para su atención médica.<br/><br/>
-                              Hace varias semanas usted tenía cirugía y estamos interesados en su recuperación después de salir del hospital. <br/><br/>El Departamento de Cirugía
-                              de nuestro hospital son miembros del Programa nacional de mejora de la calidad quirúrgica, dirigido por el Colegio Americano de Cirujanos.
-                              Estamos recopilando información sobre el estado de nuestros pacientes después de la cirugía.<br/><br/> Tome por favor algunos unos minutos
-                              para contestar a las preguntas siguientes y para volver esta letra en el uno mismo incluido dirigido, sobre estampado. <br/><br/>La información que proporcione se mantiene de forma estrictamente confidencial.
-                              `;
-  }
-
+    return amsg;
 
   }
 
-  setChildStrings(pq) {
+  //this.q.welcomeMessages[rowIdx][colIdx]
+              //     .split('$')
+              //     .reduce(function(acc, cv, idx, aray): string {
+              //                   if (idx === replacements.length) {
+              //                     return acc + cv;
+              //                   } else {
+              //                     return acc += cv + replacements[idx];
+              //                   }
+              //             }, '');
 
-    this.patientName = `Parent/Guardian of ${pq.patient.patientName.split(',')[1]}`;
-    this.surgeryDate = pq.patient.surgeryDate;
-    this.hospitalName = pq.patient.hospitalName;
-    this.doctorName = pq.patient.surgeonName;
-    this.operationDate = pq.patient.surgeryDate;
-    let lang = pq.patient.patientLanguage;
+    // this.q.welcomeMessages[rowIdx][colIdx]
+              //                     .split('$')
+              //                     .reduce(function(acc, cv, idx, aray): string {
 
-    if (lang == null) {
-      console.log('welcome: lang is null');
-      lang = 'en';
-    }
+              //                       if (idx === replacements.length) {
+              //                         return acc + cv;
+              //                       } else {
+              //                         return acc += cv + replacements[idx];
+              //                       }
+              //                     }, '');
 
-    if (lang === 'en') {
+//   setAdultStrings(pq: PQs): void {
 
-      this.introMessage = ` On ${this.operationDate} your child had an operation at ${this.hospitalName}.<br/><br/>
-                                 Dr. ${this.doctorName} and the Department of Pediatric Surgery, at our hospital, are members of the American College
-                                 of Surgeons' National Surgical Quality Improvement Program. We are gathering information on the
-                                 outcomes of our patients after surgery. <br/><br/>Please take a few minutes to answer the questions in this survey. <br/><br/>Your answers are strictly <b>confidential</b>.
-                                 `;
-      } else {
+//     this.patientName = pq.patient.patientName.split(',')[1];
+//     this.surgeryDate = pq.patient.surgeryDate;
+//     let lang = pq.patient.patientLanguage;
 
-        this.introMessage = `
-        El ${this.operationDate} su hijo tuvo una operación en ${this.hospitalName}. <br/><br/>
-        El ${this.doctorName} y el Departamento de Cirugía Pediátrica, en nuestro hospital, son miembros del Colegio Americano
-         of Surgeons' National Surgical Quality Improvement Programme. Estamos recopilando información sobre
-         resultados de nuestros pacientes después de la cirugía.<br/><br/>Tómese unos minutos para responder las preguntas de esta encuesta.
-         <br/><br/>Sus respuestas son <b>estrictamente</b> confidenciales.
-                                  `;
-      }
+//     if (lang == null) {
+//       console.log('welcome: lang is null');
+//       lang = 'en';
+//     }
 
-  }
-}
+//     if (lang === 'en') {
+
+//       this.introMessage = `Thank you for choosing New York-Presbyterian Hospital for your care.<br/><br/>
+//                                You had surgery on ${this.surgeryDate}. We are interested in your recovery <b>after</b> you left the hospital. <br/><br/>The Department of
+//                                Surgery at our hospital is a member of the American College of Surgeons' National Surgical Quality Improvemnt Porgram (NSQIP).
+//                                We are gathering information on the outcomes of our patients after surgery.<br/><br/> Please take a few minutes to answer the questions below and
+//                                return this letter in the self-addressed envolope.<br/><br/> The information you provide is maintained as strictly <b>confidential</b>.
+//                                `;
+
+//   } else {
+
+//       this.introMessage = `Gracias por elegir New York-Presbyterian Hospital para su atención médica.<br/><br/>
+//                               Hace varias semanas usted tenía cirugía y estamos interesados en su recuperación después de salir del hospital. <br/><br/>El Departamento de Cirugía
+//                               de nuestro hospital son miembros del Programa nacional de mejora de la calidad quirúrgica, dirigido por el Colegio Americano de Cirujanos.
+//                               Estamos recopilando información sobre el estado de nuestros pacientes después de la cirugía.<br/><br/> Tome por favor algunos unos minutos
+//                               para contestar a las preguntas siguientes y para volver esta letra en el uno mismo incluido dirigido, sobre estampado. <br/><br/>La información que proporcione se mantiene de forma estrictamente confidencial.
+//                               `;
+//   }
+
+
+//   }
+
+//   setChildStrings(pq) {
+
+//     this.patientName = `Parent/Guardian of ${pq.patient.patientName.split(',')[1]}`;
+//     this.surgeryDate = pq.patient.surgeryDate;
+//     this.hospitalName = pq.patient.hospitalName;
+//     this.doctorName = pq.patient.surgeonName;
+//     this.operationDate = pq.patient.surgeryDate;
+//     let lang = pq.patient.patientLanguage;
+
+//     if (lang == null) {
+//       console.log('welcome: lang is null');
+//       lang = 'en';
+//     }
+
+//     if (lang === 'en') {
+
+//       this.introMessage = ` On ${this.operationDate} your child had an operation at ${this.hospitalName}.<br/><br/>
+//                                  Dr. ${this.doctorName} and the Department of Pediatric Surgery, at our hospital, are members of the American College
+//                                  of Surgeons' National Surgical Quality Improvement Program. We are gathering information on the
+//                                  outcomes of our patients after surgery. <br/><br/>Please take a few minutes to answer the questions in this survey. <br/><br/>Your answers are strictly <b>confidential</b>.
+//                                  `;
+//       } else {
+
+//         this.introMessage = `
+//         El ${this.operationDate} su hijo tuvo una operación en ${this.hospitalName}. <br/><br/>
+//         El ${this.doctorName} y el Departamento de Cirugía Pediátrica, en nuestro hospital, son miembros del Colegio Americano
+//          of Surgeons' National Surgical Quality Improvement Programme. Estamos recopilando información sobre
+//          resultados de nuestros pacientes después de la cirugía.<br/><br/>Tómese unos minutos para responder las preguntas de esta encuesta.
+//          <br/><br/>Sus respuestas son <b>estrictamente</b> confidenciales.
+//                                   `;
+//       }
+
+//   }
+// }
+
+

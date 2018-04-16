@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse, HttpObserve } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Question, NsqipPage, Patient, PQs, Answer, PatientWithAnswers, PQError } from '../models/nqsip-data';
 import { of } from 'rxjs/observable/of';
@@ -93,14 +93,23 @@ export class NsqipDataService {
     return word;
   }
 
-  postAnswers(apatient: PatientWithAnswers): Observable<Patient |PQError> {
+  postAnswers(apatient: PatientWithAnswers): Observable< HttpResponse<Patient> | PQError > {
 
-     const httpOptions = {headers: new HttpHeaders({ 'Content-Type':  'application/json' })};
+     const httpOptions = {
+       headers: new HttpHeaders({ 'Content-Type':  'application/json' })
+      };
 
       const x = `${this.url}/PostAnswers`;
 
-      return this.http.post<Patient>(x, apatient, httpOptions)
+      return this.http.post<Patient>(x, apatient,
+        {
+          headers: { 'Content-Type':  'application/json' },
+          observe: 'response'
+        })
             .pipe(
+              tap( xx => {
+                console.log('here');
+              }),
                     catchError(this.handleError)
                 );
   }
@@ -129,8 +138,8 @@ getQuestions(id: string): Observable<PQs | PQError> {
       this.savedPatientWithAnswers = new PatientWithAnswers();
       this.savedPQs                = new PQs();
 
-      //const xx = `${this.url}/getquestions/${id}`;
-      const xx = 'assets/WOU.json';
+      const xx = `${this.url}/getquestions/${id}`;
+      //const xx = 'assets/WOU.json';
 
       return this.http.get<PQs>(xx)
           .pipe(

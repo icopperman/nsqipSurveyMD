@@ -2,6 +2,7 @@
   "url": "http://localhost:55474/nsqip",
   "urlUAT": "https://myapps.uat.nyp.org/Nsqipsurveyapi/nsqip",
   "langDictionary" : {
+         "Parent/Guardian of " : ["","Padre/Guardián de "],
          "Month is required" : ["", "Se requiere un mes"],
          "Too few digits for Month" : ["", "Muy pocos dígitos para el mes"],
          "Too many digits for Month" : ["", "Demasiados dígitos para el mes"],
@@ -38,6 +39,17 @@
        ,[
          "Your child's health and your opinion are important to New York-Presbyterian Hospital.\n    Thank you for taking the time to complete this survey.<br/><br/>\n\n    Sincerely,<br/><br/>\n    sourceName and credentials<br/><br/>\n    Surgical Clinical Reviewer<br/><br/>\n    New York-Presbyterian Hospital<br/><br/>\n    111-111-1111\n  "
        ,"\n    La salud de su hijo y su opinión son importantes para New York-Presbyterian Hospital.\n           Gracias por tomarse el tiempo para completar esta encuesta.<br/><br/>\n\n\n                             Sinceramente,<br/><br/>\n                             sourceName and credentials<br/><br/>\n                             Surgical Clinical Reviewer<br/><br/>\n                             New York-Presbyterian Hospital<br/><br/>\n                             111-111-1111<br/><br/>\n                             "
+       ]
+    ],
+    "welcomeMessages" :
+    [
+       [
+        "Thank you for choosing New York-Presbyterian Hospital for your care.<br/><br/>You had surgery on $. We are interested in your recovery <b>after</b> you left the hospital. <br/><br/>The Department of Surgery at our hospital is a member of the American College of Surgeons' National Surgical Quality Improvement Program (NSQIP). We are gathering information on the outcomes of our patients after surgery.<br/><br/> Please take a few minutes to answer the questions below and return this letter in the self-addressed envelope.<br/><br/> The information you provide is maintained as strictly <b>confidential</b>."
+        ,"`Gracias por elegir New York-Presbyterian Hospital para su atención médica.<br/><br/>Te operaron el $. Estamos interesados en su recuperación después de salir del hospital. <br/><br/>El Departamento de Cirugía de nuestro hospital son miembros del Programa nacional de mejora de la calidad quirúrgica, dirigido por el Colegio Americano de Cirujanos. Estamos recopilando información sobre el estado de nuestros pacientes después de la cirugía.<br/><br/> Tome por favor algunos unos minutos para contestar a las preguntas siguientes y para volver esta letra en el uno mismo incluido dirigido, sobre estampado. <br/><br/>La información que proporcione se mantiene de forma estrictamente confidencial.`"
+       ]
+       ,[
+        "On $ your child had an operation at $.<br/><br/>Dr. $ and the Department of Pediatric Surgery, at our hospital, are members of the American College of Surgeons' National Surgical Quality Improvement Program. We are gathering information on the outcomes of our patients after surgery. <br/><br/>Please take a few minutes to answer the questions in this survey. <br/><br/>Your answers are strictly <b>confidential</b>."
+        ,"El $ su hijo tuvo una operación en $. <br/><br/>El $ y el Departamento de Cirugía Pediátrica, en nuestro hospital, son miembros del Colegio Americano of Surgeons' National Surgical Quality Improvement Programme. Estamos recopilando información sobre resultados de nuestros pacientes después de la cirugía.<br/><br/>Tómese unos minutos para responder las preguntas de esta encuesta.<br/><br/>Sus respuestas son <b>estrictamente</b> confidenciales."
        ]
     ]
 }
