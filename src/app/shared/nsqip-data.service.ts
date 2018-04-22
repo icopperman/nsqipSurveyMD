@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse, HttpObserve } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Question, NsqipPage, Patient, PQs, Answer, PatientWithAnswers, PQError } from '../models/nqsip-data';
 import { of } from 'rxjs/observable/of';
@@ -101,17 +101,18 @@ export class NsqipDataService {
 
       const x = `${this.url}/PostAnswers`;
 
-      return this.http.post<Patient>(x, apatient,
+      return this.http.post<Patient>(
+        x, apatient,
         {
           headers: { 'Content-Type':  'application/json' },
           observe: 'response'
         })
-            .pipe(
-              tap( xx => {
-                console.log('here');
-              }),
-                    catchError(this.handleError)
-                );
+        .pipe(
+          tap( xx => {
+            console.log('here');
+          }),
+          catchError(this.handleError)
+        );
   }
 
 

@@ -1,7 +1,7 @@
 import { Component, Input, Output, AfterViewInit, OnInit, EventEmitter } from '@angular/core';
 //import { FormGroup } from "@angular/forms";
-import { NsqipDataService } from '../../shared/nsqip-data.service';
-import { Question, NsqipPage, Patient, Answer, PatientWithAnswers } from '../../models/nqsip-data';
+import {NsqipDataService} from '../../shared/nsqip-data.service';
+import {NsqipPage, PatientWithAnswers, Question, Answer} from '../../models/nqsip-data';
 
 @Component({
   selector: 'app-page-boxes',
@@ -21,30 +21,13 @@ export class PageBoxesComponent implements OnInit, AfterViewInit {
   questionsSpanish : Question[];
   answers          : string[] =  [];
 
-  // form: FormGroup;
-  // nsqipForm: FormGroup;
-
-  // payLoad = "";
-
-  constructor( private q: NsqipDataService) {
-    console.log('box cons');
-  }
-
-  getString(msg: string): string {
-
-    const amsg = this.q.getString(msg);
-
-    return amsg;
-  }
+  constructor( private q: NsqipDataService) {  }
 
   ngOnInit() {
 
     console.log('box init');
 
     this.pageNumber = this.Page.pageNumber;
-
-    //this.questionsEnglish = Object.assign({},this.Page.pageQuestions)
-    //this.questionsSpanish = Object.assign({},this.Page.pageQuestions);
 
     this.questionsEnglish = JSON.parse(JSON.stringify(this.Page.pageQuestions));
     this.questionsSpanish = JSON.parse(JSON.stringify(this.Page.pageQuestions));
@@ -82,21 +65,17 @@ export class PageBoxesComponent implements OnInit, AfterViewInit {
 
     }
 
-    if ( questionAnswer === 'back') {
+    const rc = ( questionAnswer === 'back') ? -1 : +nextPage;
 
-      this.action.emit(-1);
-
-    } else {
-
-      this.action.emit(+nextPage);
-
-    }
-
+    this.action.emit(rc);
 
   }
 
-  // onSubmit() {
-  //   this.payLoad = JSON.stringify(this.form.value);
-  // }
+  getString(msg: string): string {
+
+    const amsg = this.q.getString(msg);
+
+    return amsg;
+  }
 
 }

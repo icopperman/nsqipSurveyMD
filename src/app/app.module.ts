@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { QuestionsComponent } from './survey/questions/questions.component';
+import { QuestionsComponent1 } from './survey/questions/questions.component1';
+
 import { PageYesNoComponent } from './survey/page-yes-no/page-yes-no.component';
 import { PageBoxesComponent } from './survey/page-boxes/page-boxes.component';
 import { ConfirmComponent } from './confirm/confirm.component';
@@ -25,7 +27,9 @@ const appRoutes : Routes = [
 
   { path: 'confirm', component: ConfirmComponent },
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'survey',  component: QuestionsComponent  },
+ // { path: 'survey',  component: QuestionsComponent  },
+  { path: 'survey',  component: QuestionsComponent1  },
+
   { path: 'login/:id',  component: LoginComponent,
     resolve: { pqs: ResolverService  },
     data: { title: 'Login' }
@@ -55,7 +59,8 @@ export function getURL(appLoadSvc: AppLoadService) {
     WelcomeComponent,
     PageBoxesComponent,
     PageYesNoComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    QuestionsComponent1
   ],
   imports: [
     BrowserModule,
@@ -76,6 +81,7 @@ export function getURL(appLoadSvc: AppLoadService) {
     // tslint:disable-next-line:comment-format
     //httpInterceptorProviders,
   ],
+  entryComponents: [PageYesNoComponent, PageBoxesComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
