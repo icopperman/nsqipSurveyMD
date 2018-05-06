@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+//import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -19,6 +20,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { ResolverService } from './shared/resolver.service';
 import { NsqipDataService  } from './shared/nsqip-data.service';
 import { AppLoadService } from './shared/app-load.service';
+import { MdModule } from './md.module';
 
 // tslint:disable-next-line:comment-format
 //import { httpInterceptorProviders } from './interceptorsBarrel';
@@ -67,11 +69,13 @@ export function getURL(appLoadSvc: AppLoadService) {
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    FlexLayoutModule,
     RouterModule.forRoot(
       appRoutes // ,      { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserAnimationsModule,
-    MatButtonModule, MatCheckboxModule
+    MdModule
+    //MatButtonModule, MatCheckboxModule
   ],
   providers: [
     AppLoadService,

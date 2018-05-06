@@ -1,7 +1,10 @@
 <form [formGroup]='loginForm'>
 
+
   <div class="row align-self-end" style='background-color: red; color: white;'>
+
     <div class="col mt-2"  >
+
       <div class="form-check form-check-inline" style='float: right;' >
         <input formControlName='lang' class="form-check-input" type="radio" name="lang" id="inlineRadio2" value="es">
         <label class="form-check-label" for="inlineRadio2">Esp</label>
@@ -10,13 +13,15 @@
         <input formControlName='lang' class="form-check-input" type="radio" name="lang" id="inlineRadio1" value="en" >
         <label class="form-check-label" for="inlineRadio1">Eng</label>
       </div>
+
+
     </div>
   </div>
 
   <div class="row pb-3 mb-3 justify-content-center" style='background-color: red; color: white;'>
       <div class="col" >
-        <h2  style='text-align: center;'> {{welcomeMessage}}</h2>
-      </div>
+    <h2  style='text-align: center;'> {{welcomeMessage}}</h2>
+  </div>
   </div>
 
   <div class="row mb-4">
@@ -62,6 +67,8 @@
 
       <span class="form-text text-muted" *ngIf="displayMessage.dobYear">{{ displayMessage.dobYear}}</span>
     </div>
+
+
 
   </div>
   <div class="row justify-content-around no-gutters">
