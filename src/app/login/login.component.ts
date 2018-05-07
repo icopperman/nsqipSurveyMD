@@ -4,10 +4,7 @@ import { ParamMap } from '@angular/router/src/shared';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AbstractControl } from '@angular/forms/src/model';
 import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
-
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/debounceTime';
-
+import { debounceTime } from 'rxjs/operators';
 import { NsqipDataService } from '../shared/nsqip-data.service';
 import { PQs, PQError } from '../models/nqsip-data';
 
@@ -138,7 +135,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     });
 
-    this.loginForm.get('dobDay').valueChanges.debounceTime(400).subscribe( value => {
+    this.loginForm.get('dobDay').valueChanges.pipe(debounceTime(400)).subscribe( value => {
 
       this.setValidationMessage('dobDay');
 
@@ -150,7 +147,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     });
 
-    this.loginForm.get('dobYear').valueChanges.debounceTime(400).subscribe( value => {
+    this.loginForm.get('dobYear').valueChanges
+    .pipe(debounceTime(400)).subscribe( value => {
 
       this.setValidationMessage('dobYear');
 
@@ -162,7 +160,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     });
 
-    this.loginForm.get('dobMonth').valueChanges.debounceTime(400).subscribe( value => {
+    this.loginForm.get('dobMonth').valueChanges.pipe(debounceTime(400)).subscribe( value => {
 
         console.log(value);
         this.setValidationMessage('dobMonth');

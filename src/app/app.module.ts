@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import {FlexLayoutModule} from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -69,7 +68,7 @@ export function getURL(appLoadSvc: AppLoadService) {
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    FlexLayoutModule,
+//    FlexLayoutModule,
     RouterModule.forRoot(
       appRoutes // ,      { enableTracing: true } // <-- debugging purposes only
     ),

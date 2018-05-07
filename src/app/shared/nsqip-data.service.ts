@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable ,  of, throwError } from 'rxjs';
 import { Question, NsqipPage, Patient, PQs, Answer, PatientWithAnswers, PQError } from '../models/nqsip-data';
-import { of } from 'rxjs/observable/of';
 
 import { tap, catchError } from 'rxjs/operators';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { unescapeIdentifier } from '@angular/compiler';
 
  @Injectable()
@@ -209,7 +207,6 @@ getQuestions(id: string): Observable<PQs | PQError> {
         // A client-side or network error occurred. Handle it accordingly.
         console.log('An error occurred:', aError.error.error);
 
-        // return new ErrorObservable(theError)
 
       } else {
 
@@ -230,8 +227,7 @@ getQuestions(id: string): Observable<PQs | PQError> {
           }
       }
 
-      // return an ErrorObservable with a user-facing error message
-      return ErrorObservable.create(theError);
+      return throwError(theError);
               //  'Something bad happened; please try again later.'
     }
 
