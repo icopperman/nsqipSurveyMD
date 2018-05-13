@@ -26,7 +26,7 @@ export class QuestionsComponent1 implements OnInit, OnDestroy {
   Pages             : NsqipPage[];
   patient           : Patient;
   patientWithAnswers : PatientWithAnswers;
-  currentPage       : number;
+  currentPageNum       : number;
   prevPages         : number[];
 
   @ViewChild('questionContainer', { read: ViewContainerRef}) questionContainer : ViewContainerRef;
@@ -40,7 +40,7 @@ export class QuestionsComponent1 implements OnInit, OnDestroy {
 
     console.log('survey constructor');
 
-    this.currentPage = 1;
+    this.currentPageNum = 1;
     this.prevPages = [];
 
   }
@@ -54,22 +54,60 @@ export class QuestionsComponent1 implements OnInit, OnDestroy {
 
   onAction(nextPage: number): void {
 
+    // switch (nextPage) {
+
+    //   case 99: this.router.navigate(['/confirm']); break;
+      
+    //   case -1: 
+      
+    //     this.currentPage = this.prevPages.pop();
+    //     break;
+
+    //   default:
+    //     this.prevPages.push(this.currentPage);
+
+    //     this.currentPage = nextPage;
+    //     const currPage = this.Pages[nextPage];
+    //     const pagetype = currPage.pageType;
+    //     let factory = null;
+    //     let componentRef = null;
+
+    //     this.questionContainer.clear();
+
+    //     factory = (pagetype === 'yesno') ?
+    //       this.cfr.resolveComponentFactory(PageYesNoComponent)
+    //       : this.cfr.resolveComponentFactory(PageBoxesComponent);
+
+    //     componentRef = this.questionContainer.createComponent(factory);
+    //     componentRef.instance.Page = this.Pages[nextPage];
+    //     componentRef.instance.patientWithAnswers = this.patientWithAnswers;
+
+    //     componentRef.instance.action.subscribe(e => this.onAction(e));
+    //     break;
+    // }
+
     if (nextPage === 99) {
 
       this.router.navigate(['/confirm']);
+      return;
 
-    } else {
+    } 
 
       if (nextPage === -1) {
 
-        this.currentPage = this.prevPages.pop();
+        this.currentPageNum = this.prevPages.pop();
+        nextPage = this.currentPageNum;
 
-      } else {
+      } 
+      else {
 
-        this.prevPages.push(this.currentPage);
+        this.prevPages.push(this.currentPageNum);
 
-        this.currentPage = nextPage;
-        const currPage   = this.Pages[nextPage];
+        this.currentPageNum = nextPage;
+
+      }
+      
+      const currPage   = this.Pages[nextPage - 1];
         const pagetype   = currPage.pageType;
         let factory      = null;
         let componentRef = null;
@@ -81,13 +119,13 @@ export class QuestionsComponent1 implements OnInit, OnDestroy {
          : this.cfr.resolveComponentFactory(PageBoxesComponent);
 
         componentRef                             = this.questionContainer.createComponent(factory);
-        componentRef.instance.Page               = this.Pages[nextPage];
+        componentRef.instance.Page               = currPage; //this.Pages[nextPage];
         componentRef.instance.patientWithAnswers = this.patientWithAnswers;
 
         componentRef.instance.action.subscribe(e => this.onAction(e) );
 
-      }
-    }
+     
+    
   }
 
   ngOnInit() {

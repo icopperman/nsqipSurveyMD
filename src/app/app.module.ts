@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule} from '@angular/flex-layout';
+
 //import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +22,8 @@ import { ResolverService } from './shared/resolver.service';
 import { NsqipDataService  } from './shared/nsqip-data.service';
 import { AppLoadService } from './shared/app-load.service';
 import { MdModule } from './md.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 // tslint:disable-next-line:comment-format
 //import { httpInterceptorProviders } from './interceptorsBarrel';
@@ -68,12 +72,13 @@ export function getURL(appLoadSvc: AppLoadService) {
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-//    FlexLayoutModule,
+    FlexLayoutModule,
     RouterModule.forRoot(
       appRoutes // ,      { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserAnimationsModule,
-    MdModule
+    MdModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
     //MatButtonModule, MatCheckboxModule
   ],
   providers: [

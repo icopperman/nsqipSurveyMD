@@ -1,7 +1,95 @@
 <form [formGroup]='loginForm'>
+  <div class="page">
+    
+    <div class="page-header" style='background-color: red; color: white;'>
+      <mat-toolbar color="warn">
+        <mat-toolbar-row>
+          <span style="flex: 1 1 auto"> </span>
+          <mat-slide-toggle class="example-margin" [checked]="checked" (change)="onchange($event)" [disabled]="disabled" [(ngModel)]="alang"
+            [ngModelOptions]="{standalone: true}">
+            {{alang}}
+          </mat-slide-toggle>
+        </mat-toolbar-row>
+        <!-- [color]="color" -->
+    
+        <mat-toolbar-row>
+          <div fxFlex fxFlexAlign="center">
+            <h1 style='text-align: center;'> {{welcomeMessage}}</h1>
+          </div>
+          <!-- <span>Second Line</span>
+                  <span class="example-spacer"></span>
+                  <mat-icon class="example-icon">verified_user</mat-icon> -->
+        </mat-toolbar-row>
+    
+        <!-- <mat-toolbar-row>
+                  <span>Third Line</span>
+                  <span class="example-spacer"></span>
+                  <mat-icon class="example-icon">favorite</mat-icon>
+                  <mat-icon class="example-icon">delete</mat-icon>
+                </mat-toolbar-row> -->
+      </mat-toolbar>
+      <!--           
+          <div class="form-check form-check-inline" style='float: right;'>
+            <input formControlName='lang' class="form-check-input" type="radio" name="lang" id="inlineRadio2" value="es">
+            <label class="form-check-label" for="inlineRadio2">Esp</label>
+          </div>
+          <div class="form-check form-check-inline" style="float:right;">
+            <input formControlName='lang' class="form-check-input" type="radio" name="lang" id="inlineRadio1" value="en">
+            <label class="form-check-label" for="inlineRadio1">Eng</label>
+          </div> -->
+    </div>
 
-
-  <div class="row align-self-end" style='background-color: red; color: white;'>
+    <div class="page-content">
+      <!-- <div class="col">
+            <h2 style='text-align: center;'> {{welcomeMessage}}</h2>
+          </div> -->
+      <div class="col text-center">
+        <div>{{beginMsg}}</div>
+      </div>
+      <div class="col text-center">
+        {{dobMessage}}
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly"> 
+    
+    
+        <div fxFlex [ngClass]="{'has-error':  displayMessage.dobMonth}">
+    
+          <mat-form-field>
+            <input #mon matInput maxlength="2" formControlName="dobMonth" type="text" id="dobMonth" name="dobMonth"
+              placeholder='MM' (keyup)='preventAlpha($event, mon, mon.value)'>
+    
+          </mat-form-field>
+          <span class="form-text text-muted" *ngIf="displayMessage.dobMonth">{{ displayMessage.dobMonth}}</span>
+        </div>
+    
+        <div fxFlex class="form-group" [ngClass]="{'has-error':  displayMessage.dobDay}">
+    
+          <mat-form-field>
+            <input matInput #day class='form-control' maxlength='2' formControlName="dobDay" type="text" id="dobDay" name="dobDay" placeholder='DD'
+              (keyup)='preventAlpha($event, day, day.value)'>
+          </mat-form-field>
+          <span class="form-text text-muted" *ngIf="displayMessage.dobDay">{{ displayMessage.dobDay}}</span>
+        </div>
+    
+        <div fxFlex class=" form-group" [ngClass]="{'has-error':  displayMessage.dobYear}">
+    
+          <mat-form-field>
+            <input matInput #year maxlength='4' formControlName="dobYear" type="text" id="dobYear" name="dobYear" placeholder='YYYY'
+              (keyup)='preventAlpha($event, year, year.value)'>
+          </mat-form-field>
+          <span class="form-text text-muted" *ngIf="displayMessage.dobYear">{{ displayMessage.dobYear}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <!-- <div class="col">
+            <!-- <button class="btn btn-danger btn-lg btn-block" [disabled]="hasErrors"  (click)="startSurvey()" id="btnStart"> {{startMsg}}</button> 
+          </div> -->
+      <button mat-raised-button color="warn" fxFlexFill (click)="startSurvey()" id="btnStart"> {{startMsg}}</button>
+    </div>
+    </div>
+    </form>
+  <!-- <div class="row align-self-end" style='background-color: red; color: white;'>
 
     <div class="col mt-2"  >
 
@@ -36,30 +124,30 @@
     </div>
   </div>
 
-  <div class="row justify-content-around no-gutters">
+  <div class="row justify-content-around no-gutters"> -->
 
-    <div class="col-3 form-group" [ngClass]="{'has-error':  displayMessage.dobMonth}" >
-      <!-- <input class='w-50' [(ngModel)]="dobMonth" type="text" id="dobMonth" name="dobMonth" placeholder='MM'> -->
+    <!-- <div class="col-3 form-group" [ngClass]="{'has-error':  displayMessage.dobMonth}" >
+      <!-- <input class='w-50' [(ngModel)]="dobMonth" type="text" id="dobMonth" name="dobMonth" placeholder='MM'> 
       <input #mon class='form-control' maxlength="2"
       formControlName="dobMonth" type="text"
       id="dobMonth" name="dobMonth" placeholder='MM'
       (keyup) = 'preventAlpha($event, mon, mon.value)'>
 
       <span class="form-text text-muted" *ngIf="displayMessage.dobMonth">{{ displayMessage.dobMonth}}</span>
-    </div>
+    </div> -->
 
-    <div class="col-3 form-group"  [ngClass]="{'has-error':  displayMessage.dobDay}">
-      <!-- <input class='w-50' [(ngModel)]="dobDay" type="text" id="dobDay" name="dobDay" placeholder='DD'> -->
+    <!-- <div class="col-3 form-group"  [ngClass]="{'has-error':  displayMessage.dobDay}">
+      <!-- <input class='w-50' [(ngModel)]="dobDay" type="text" id="dobDay" name="dobDay" placeholder='DD'> 
       <input #day class='form-control' maxlength='2'
       formControlName="dobDay" type="text"
       id="dobDay" name="dobDay" placeholder='DD'
       (keyup) = 'preventAlpha($event, day, day.value)'>
 
       <span class="form-text text-muted" *ngIf="displayMessage.dobDay">{{ displayMessage.dobDay}}</span>
-    </div>
+    </div> -->
 
-    <div class="col-3 form-group"  [ngClass]="{'has-error':  displayMessage.dobYear}">
-      <!-- <input class='w-50' [(ngModel)]="dobYear" type="text" id="dobYear" name="dobYear" placeholder='YYYY'> -->
+    <!-- <div class="col-3 form-group"  [ngClass]="{'has-error':  displayMessage.dobYear}">
+      <!-- <input class='w-50' [(ngModel)]="dobYear" type="text" id="dobYear" name="dobYear" placeholder='YYYY'> 
       <input #year class='form-control' maxlength='4'
       formControlName="dobYear" type="text"
       id="dobYear" name="dobYear" placeholder='YYYY'
@@ -67,13 +155,13 @@
 
       <span class="form-text text-muted" *ngIf="displayMessage.dobYear">{{ displayMessage.dobYear}}</span>
     </div>
+  -->
 
+  <!-- </div>
 
+  <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="5px">
 
-  </div>
-  <div class="row justify-content-around no-gutters">
-
-      <div class="col-3 form-group" [ngClass]="{'has-error':  displayMessage.dobMonth}" >
+      <div fxFlex class="form-group" [ngClass]="{'has-error':  displayMessage.dobMonth}" >
 
         <mat-form-field>
             <input #mon matInput class='form-control' maxlength="2"
@@ -85,7 +173,7 @@
         <span class="form-text text-muted" *ngIf="displayMessage.dobMonth">{{ displayMessage.dobMonth}}</span>
       </div>
 
-      <div class="col-3 form-group"  [ngClass]="{'has-error':  displayMessage.dobDay}">
+      <div fxFlex class="form-group"  [ngClass]="{'has-error':  displayMessage.dobDay}">
 
         <mat-form-field>
           <input matInput #day class='form-control' maxlength='2'
@@ -96,7 +184,7 @@
         <span class="form-text text-muted" *ngIf="displayMessage.dobDay">{{ displayMessage.dobDay}}</span>
       </div>
 
-      <div class="col-3 form-group"  [ngClass]="{'has-error':  displayMessage.dobYear}">
+      <div fxFlex class=" form-group"  [ngClass]="{'has-error':  displayMessage.dobYear}">
 
         <mat-form-field>
           <input matInput #year maxlength='4'
@@ -124,4 +212,4 @@
       <button class="btn btn-danger btn-lg btn-block" [disabled]="hasErrors"  (click)="startSurvey()" id="btnStart"> {{startMsg}}</button>
     </div>
   </div>
-  </form>
+  </form> -->

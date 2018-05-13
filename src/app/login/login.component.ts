@@ -7,10 +7,11 @@ import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
 import { debounceTime } from 'rxjs/operators';
 import { NsqipDataService } from '../shared/nsqip-data.service';
 import { PQs, PQError } from '../models/nqsip-data';
+import { MatSlideToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
+  templateUrl: './login.component1.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, AfterViewInit {
@@ -63,6 +64,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   };
 
+  alang = "Ennglish"
+  color = 'accent';
+  checked = false;
+  disabled = false;
   constructor(
 
     private router: Router,
@@ -74,6 +79,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ) {  }
 
+  onchange(e: MatSlideToggleChange) {
+
+    this.alang =  e.checked ? "English" : "Spanish"
+  
+  }
   ngAfterViewInit(): void {
 
     //this.firstField.nativeElement.focus();

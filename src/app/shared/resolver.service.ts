@@ -37,7 +37,11 @@ export class ResolverService implements Resolve<PQs | PQError> {
 
     return this.q.getQuestions(id.toUpperCase())
               .pipe(
-                catchError(err => of(err))
+                catchError(
+                  err => { 
+                    console.log("resolveer :" + err); 
+                    return of(err) 
+                  })
               );
 
   }
