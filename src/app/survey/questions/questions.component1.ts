@@ -11,7 +11,8 @@ import {
   NsqipPage,
   PQs,
   Patient,
-  PatientWithAnswers
+  PatientWithAnswers,
+  Answer
 } from '../../models/nqsip-data';
 import {PageBoxesComponent} from '../page-boxes/page-boxes.component';
 import { PageYesNoComponent } from '../page-yes-no/page-yes-no.component';
@@ -28,6 +29,7 @@ export class QuestionsComponent1 implements OnInit, OnDestroy {
   patientWithAnswers : PatientWithAnswers;
   currentPageNum       : number;
   prevPages         : number[];
+  pageNumber: number = 1;
 
   @ViewChild('questionContainer', { read: ViewContainerRef}) questionContainer : ViewContainerRef;
 
@@ -50,6 +52,30 @@ export class QuestionsComponent1 implements OnInit, OnDestroy {
     const amsg = this.q.getString(msg);
 
     return amsg;
+  }
+  
+  goBack() {
+
+    this.currentPageNum = this.prevPages.pop();
+    let nextPage = this.currentPageNum;
+    const currPage   = this.Pages[nextPage - 1];
+    const pagetype   = currPage.pageType;
+    let factory      = null;
+    let componentRef = null;
+    this.pageNumber = nextPage;
+    this.questionContainer.clear();
+
+    factory = ( pagetype === 'yesno') ?
+       this.cfr.resolveComponentFactory(PageYesNoComponent)
+     : this.cfr.resolveComponentFactory(PageBoxesComponent);
+
+    componentRef                             = this.questionContainer.createComponent(factory);
+    componentRef.instance.Page               = currPage; //this.Pages[nextPage];
+    componentRef.instance.patientWithAnswers = this.patientWithAnswers;
+
+    componentRef.instance.action.subscribe(e => this.onAction(e) );
+
+
   }
 
   onAction(nextPage: number): void {
@@ -111,7 +137,7 @@ export class QuestionsComponent1 implements OnInit, OnDestroy {
         const pagetype   = currPage.pageType;
         let factory      = null;
         let componentRef = null;
-
+        this.pageNumber = nextPage;
         this.questionContainer.clear();
 
         factory = ( pagetype === 'yesno') ?
@@ -147,6 +173,7 @@ export class QuestionsComponent1 implements OnInit, OnDestroy {
       componentRef.instance.patientWithAnswers = pqs.patientWithAnswers;
 
       componentRef.instance.action.subscribe(e => this.onAction(e) );
+      this.pageNumber = 1;
 
     });
 

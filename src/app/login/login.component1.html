@@ -1,34 +1,34 @@
-<form [formGroup]='loginForm'>
-  <div class="page">
-    
-    <div class="page-header" style='background-color: red; color: white;'>
-      <mat-toolbar color="warn">
-        <mat-toolbar-row>
-          <span style="flex: 1 1 auto"> </span>
-          <mat-slide-toggle class="example-margin" [checked]="checked" (change)="onchange($event)" [disabled]="disabled" [(ngModel)]="alang"
-            [ngModelOptions]="{standalone: true}">
-            {{alang}}
-          </mat-slide-toggle>
-        </mat-toolbar-row>
-        <!-- [color]="color" -->
-    
-        <mat-toolbar-row>
-          <div fxFlex fxFlexAlign="center">
-            <h1 style='text-align: center;'> {{welcomeMessage}}</h1>
-          </div>
-          <!-- <span>Second Line</span>
+<!-- <form [formGroup]='loginForm'> -->
+<div style="display: flex; flex-direction: column; height:100vh;">
+
+  <div style='flex: 1 0 0; background-color: red; color: white;'>
+    <mat-toolbar color="warn">
+      <mat-toolbar-row >
+        <span style="flex: 1 1 auto"> </span>
+        <mat-slide-toggle [checked]="checked" (change)="onchange($event)" [disabled]="disabled" [(ngModel)]="alang"
+          [ngModelOptions]="{standalone: true}">
+          {{alang}}
+        </mat-slide-toggle>
+      </mat-toolbar-row>
+      <!-- [color]="color" -->
+
+      <mat-toolbar-row fxFlex fxFlexAlign="center center">
+        <div >
+          <h1 style='text-align: center;'> {{welcomeMessage}}</h1>
+        </div>
+        <!-- <span>Second Line</span>
                   <span class="example-spacer"></span>
                   <mat-icon class="example-icon">verified_user</mat-icon> -->
-        </mat-toolbar-row>
-    
-        <!-- <mat-toolbar-row>
+      </mat-toolbar-row>
+
+      <!-- <mat-toolbar-row>
                   <span>Third Line</span>
                   <span class="example-spacer"></span>
                   <mat-icon class="example-icon">favorite</mat-icon>
                   <mat-icon class="example-icon">delete</mat-icon>
                 </mat-toolbar-row> -->
-      </mat-toolbar>
-      <!--           
+    </mat-toolbar>
+    <!--           
           <div class="form-check form-check-inline" style='float: right;'>
             <input formControlName='lang' class="form-check-input" type="radio" name="lang" id="inlineRadio2" value="es">
             <label class="form-check-label" for="inlineRadio2">Esp</label>
@@ -37,57 +37,58 @@
             <input formControlName='lang' class="form-check-input" type="radio" name="lang" id="inlineRadio1" value="en">
             <label class="form-check-label" for="inlineRadio1">Eng</label>
           </div> -->
-    </div>
+  </div>
 
-    <div class="page-content">
-      <!-- <div class="col">
+  <div style='flex: 8 0 0;'>
+    <!-- <div class="col">
             <h2 style='text-align: center;'> {{welcomeMessage}}</h2>
           </div> -->
-      <div class="col text-center">
-        <div>{{beginMsg}}</div>
-      </div>
-      <div class="col text-center">
-        {{dobMessage}}
-      </div>
-      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly"> 
-    
-        <div fxFlex [ngClass]="{'has-error':  displayMessage.dobMonth}">
-    
-          <mat-form-field>
-            <input #mon matInput maxlength="2" formControlName="dobMonth" type="text" id="dobMonth" name="dobMonth"
-              placeholder='MM' (keyup)='preventAlpha($event, mon, mon.value)'>
-    
-          </mat-form-field>
-          <span class="form-text text-muted" *ngIf="displayMessage.dobMonth">{{ displayMessage.dobMonth}}</span>
-        </div>
-    
-        <div fxFlex class="form-group" [ngClass]="{'has-error':  displayMessage.dobDay}">
-    
-          <mat-form-field>
-            <input matInput #day class='form-control' maxlength='2' formControlName="dobDay" type="text" id="dobDay" name="dobDay" placeholder='DD'
-              (keyup)='preventAlpha($event, day, day.value)'>
-          </mat-form-field>
-          <span class="form-text text-muted" *ngIf="displayMessage.dobDay">{{ displayMessage.dobDay}}</span>
-        </div>
-    
-        <div fxFlex class=" form-group" [ngClass]="{'has-error':  displayMessage.dobYear}">
-    
-          <mat-form-field>
-            <input matInput #year maxlength='4' formControlName="dobYear" type="text" id="dobYear" name="dobYear" placeholder='YYYY'
-              (keyup)='preventAlpha($event, year, year.value)'>
-          </mat-form-field>
-          <span class="form-text text-muted" *ngIf="displayMessage.dobYear">{{ displayMessage.dobYear}}</span>
-        </div>
-      </div>
+    <div class="col text-center">
+      <div>{{beginMsg}}</div>
     </div>
-    <div class="page-footer">
-      <!-- <div class="col">
+    <div class="col text-center">
+      {{dobMessage}}
+    </div>
+    <!-- <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-evenly">  -->
+
+    <!-- <div fxFlex [ngClass]="{'has-error':  displayMessage.dobMonth}">
+
+      <mat-form-field>
+        <input #mon matInput maxlength="2" formControlName="dobMonth" type="text" id="dobMonth" name="dobMonth" placeholder='MM'
+          (keyup)='preventAlpha($event, mon, mon.value)'>
+
+      </mat-form-field>
+      <span class="form-text text-muted" *ngIf="displayMessage.dobMonth">{{ displayMessage.dobMonth}}</span>
+    </div>
+
+    <div fxFlex class="form-group" [ngClass]="{'has-error':  displayMessage.dobDay}">
+
+      <mat-form-field>
+        <input matInput #day class='form-control' maxlength='2' formControlName="dobDay" type="text" id="dobDay" name="dobDay" placeholder='DD'
+          (keyup)='preventAlpha($event, day, day.value)'>
+      </mat-form-field>
+      <span class="form-text text-muted" *ngIf="displayMessage.dobDay">{{ displayMessage.dobDay}}</span>
+    </div>
+
+    <div fxFlex class=" form-group" [ngClass]="{'has-error':  displayMessage.dobYear}">
+
+      <mat-form-field>
+        <input matInput #year maxlength='4' formControlName="dobYear" type="text" id="dobYear" name="dobYear" placeholder='YYYY'
+          (keyup)='preventAlpha($event, year, year.value)'>
+      </mat-form-field>
+      <span class="form-text text-muted" *ngIf="displayMessage.dobYear">{{ displayMessage.dobYear}}</span>
+    </div> -->
+  </div>
+  <!-- </div> -->
+  <div style='flex: 1 0 0;'>
+    <!-- <div class="col">
             <!-- <button class="btn btn-danger btn-lg btn-block" [disabled]="hasErrors"  (click)="startSurvey()" id="btnStart"> {{startMsg}}</button> 
           </div> -->
-      <button mat-raised-button color="warn" fxFlexFill (click)="startSurvey()" id="btnStart"> {{startMsg}}</button>
-    </div>
-    </div>
-    </form>
+    <button mat-raised-button color="warn" fxFlexFill (click)="startSurvey()" id="btnStart"> {{startMsg}}</button>
+  </div>
+</div>
+
+    <!-- </form> -->
   <!-- <div class="row align-self-end" style='background-color: red; color: white;'>
 
     <div class="col mt-2"  >

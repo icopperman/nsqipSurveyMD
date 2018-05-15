@@ -27,6 +27,7 @@ export class ResolverService implements Resolve<PQs | PQError> {
         // x.httpError = new HttpErrorResponse({})
 
         return of(x);
+        
       } else {
 
         id = this.q.pathid;

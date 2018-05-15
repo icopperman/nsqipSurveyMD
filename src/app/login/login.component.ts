@@ -11,7 +11,7 @@ import { MatSlideToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component1.html',
+  templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, AfterViewInit {
