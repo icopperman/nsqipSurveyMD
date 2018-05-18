@@ -11,16 +11,16 @@
 </div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="col">
     <button class="btn btn-danger btn-lg btn-block" (click)="back()" id="btnBack" >Restart Survey</button>
   </div>
-</div>
+</div> -->
 
 <div class="row fixed-bottom">
-    <div class="col">
+    <div class="col" *ngIf="submitted == false">
       <button class="btn btn-danger btn-lg btn-block" (click)="closeSurvey()" id="btnStart" >
-         {{getString("Close Survey")}}</button>
+         {{getString("Submit Survey")}}</button>
     </div>
   </div>
 

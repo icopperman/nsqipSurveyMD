@@ -12,8 +12,10 @@ export class PageYesNoComponent implements OnInit {
 
   @Input() Page               : NsqipPage;
   @Input() patientWithAnswers : PatientWithAnswers;
-  pageNumber                  : number;
-  pageQuestions               : Question[];
+
+  pageQuestions    : Question[];
+  questionsEnglish : Question[];
+  questionsSpanish : Question[];
 
   @Output() action = new EventEmitter<number>();
 
@@ -22,33 +24,27 @@ export class PageYesNoComponent implements OnInit {
   ngOnInit() {
 
     console.log('yesno init');
+    
+    this.questionsEnglish = JSON.parse(JSON.stringify(this.Page.pageQuestions));
+    this.questionsSpanish = JSON.parse(JSON.stringify(this.Page.pageQuestions));
 
-    this.pageNumber    = this.Page.pageNumber ;
-    this.pageQuestions = this.Page.pageQuestions  ;
+    this.questionsSpanish.map( (q: Question) => q.questionText = q.questionTextSpanish );
+
+    this.pageQuestions = ( this.q.language === 'es') ? this.questionsSpanish : this.questionsEnglish;
 
   }
 
-  ans(page: Question, questionAnswer: string) {
+  ans(theQuestion: Question, questionAnswer: string) {
 
-    const currentPage = page.pageNumber;
-    const apatient    = this.patientWithAnswers;
-
-    const theAns : Answer = new Answer();
-
-    theAns.questionNumber = page.questionNo;
-    theAns.questionText   = page.questionText;
-    theAns.questionType   = page.questionType;
-    theAns.answer         = questionAnswer;
-
-    apatient.answers[+theAns.questionNumber - 1].answer = questionAnswer;
+    this.patientWithAnswers.answers[+theQuestion.questionNo - 1].answer = questionAnswer;
 
     let rc = 0;
 
     switch (questionAnswer) {
 
-      case 'back': rc = -1; break;
-      case 'yes' : rc = +page.questionNextYes; break;
-      case 'no'  : rc = +page.questionNextNo; break;
+      // case 'back': rc = -1; break;
+      case 'yes' : rc = +theQuestion.questionNextYes; break;
+      case 'no'  : rc = +theQuestion.questionNextNo; break;
 
     }
 
@@ -65,3 +61,4 @@ export class PageYesNoComponent implements OnInit {
   }
 
 }
+

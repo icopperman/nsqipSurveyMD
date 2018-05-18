@@ -9,7 +9,7 @@ export class AppLoadService {
 
   getURL() {
 
-    const path = 'assets/url.json'; //really a json file, but iis will not serve json files
+    const path = 'assets/url.txt'; //really a json file, but iis will not serve json files
     const promise = this.http.get(path)
                   .toPromise()
                   .then(settings => {
@@ -22,7 +22,7 @@ export class AppLoadService {
                     return settings;
                   })
                   .catch( (err) => {
-                    this.http.get('assets/url.txt')
+                    this.http.get('assets/url.json')
                         .toPromise()
                         .then(settings => {
                           this.q.url = settings['url'];

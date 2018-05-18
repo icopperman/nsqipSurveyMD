@@ -115,6 +115,6 @@
 </form>
   <div class="row mt-4 fixed-bottom">
     <div class="col">
-      <button class="btn btn-danger btn-lg btn-block" [disabled]="hasErrors"  (click)="startSurvey()" id="btnStart"> {{startMsg}}</button>
+      <button #start class="btn btn-danger btn-lg btn-block" [disabled]="hasErrors"  (click)="startSurvey()" id="btnStart"> {{startMsg}}</button>
     </div>
   </div>

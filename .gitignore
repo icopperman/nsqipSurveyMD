@@ -36,6 +36,7 @@ testem.log
 /typings
 src/assets/url.json
 src/assets/url.txt
+web.config
 # src/assets/WOU.json
 # e2e
 /e2e/*.js

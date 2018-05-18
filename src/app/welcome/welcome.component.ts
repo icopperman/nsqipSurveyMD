@@ -1,4 +1,4 @@
-import { Component,       OnInit }    from '@angular/core';
+import { Component,       OnInit, Renderer2, ViewChild, ElementRef }    from '@angular/core';
 import { Router           }      from '@angular/router/';
 import { NsqipDataService }      from '../shared/nsqip-data.service';
 import { PQs              }      from '../models/nqsip-data';
@@ -12,9 +12,10 @@ export class WelcomeComponent implements OnInit {
 
   patientName         : string;
   introMessage        : string;
+  @ViewChild('start') startBtn: ElementRef;
 
-  constructor(private router: Router, private q: NsqipDataService) {
-
+  constructor(private router: Router, private q: NsqipDataService  ) 
+  {
     const id = window.localStorage.getItem('id');
 
     this.q.getQuestions(id).subscribe( ( pq: PQs) => {
@@ -37,6 +38,13 @@ export class WelcomeComponent implements OnInit {
             this.introMessage = this.doReplacement(replacements, rowIdx, colIdx);
 
      });
+
+  }
+
+  ngAfterViewInit(): void {
+
+    //this.firstField.nativeElement.focus();
+    this.startBtn.nativeElement.focus();
 
   }
 

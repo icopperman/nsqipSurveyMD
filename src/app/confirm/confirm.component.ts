@@ -15,6 +15,8 @@ export class ConfirmComponent implements OnInit {
   srcNameCredential : string;
   hospitalName      : string;
   phoneNumber       : string;
+  submitted         : boolean = false;
+
   confirmMessages   : string[][] = [];
 
   constructor(private q: NsqipDataService, private router: Router) {
@@ -67,6 +69,8 @@ export class ConfirmComponent implements OnInit {
       },
       () => {
         console.log('postanswer: completion');
+        this.confirmMessage = "Survey has been submitted. Thank you for your participation."
+        this.submitted = true;
       }
     );
   }
